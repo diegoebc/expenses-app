@@ -1,0 +1,1 @@
+export * as ExpenseController from "./expense.controller"
