@@ -1,5 +1,6 @@
 import { UserModel } from "../models"
 import { encodePassword, verifyPassword } from "../utils/auth.utils"
+import { generateToken } from "../utils/jwt"
 
 export const loginUser = async (email: string, password: string) => {
   const user = await UserModel.findOne({email})
@@ -11,7 +12,9 @@ export const loginUser = async (email: string, password: string) => {
   if(!isValid){
     return 'EMAIL_OR_PASSWORD_INVALID'
   }
-  return user
+  const token = generateToken({email})
+  const response = { token, user}
+  return response
 }
 
 export const registerUser = async (email: string, password: string) => {
@@ -21,6 +24,8 @@ export const registerUser = async (email: string, password: string) => {
   }else {
     const hashPassword = await encodePassword(password)
     const newUser = await UserModel.create({email,password: hashPassword})
-    return newUser
+    const token = await generateToken({email})
+    const response = { token, newUser }
+    return response
   }
 }
