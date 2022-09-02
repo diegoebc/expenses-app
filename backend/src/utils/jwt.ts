@@ -7,3 +7,8 @@ export const generateToken = (payload: any) => {
   })
   return token
 }
+
+export const verifyToken = async (token: string) => {
+  const res = await verify(token,config.JWT_SECRET)
+  return res
+}
