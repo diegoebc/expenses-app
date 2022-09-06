@@ -1,8 +1,8 @@
 import { Expense } from "../interfaces/expense.interface"
 import { ExpenseModel } from "../models"
 
-export const getAllExpenses = async () => {
-    const expenses = await ExpenseModel.find()
+export const getAllExpenses = async (userId: string) => {
+    const expenses = await ExpenseModel.find({userId})
     return expenses
 }
 

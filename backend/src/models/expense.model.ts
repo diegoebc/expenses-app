@@ -13,6 +13,10 @@ const ExpenseSchema = new Schema<Expense>({
  paid: {
   type: Boolean,
   required: true
+ },
+ userId: {
+  type: String,
+  required: true
  }
 },{
   timestamps: true,

@@ -12,7 +12,7 @@ export const loginUser = async (email: string, password: string) => {
   if(!isValid){
     return 'EMAIL_OR_PASSWORD_INVALID'
   }
-  const token = generateToken({email})
+  const token = generateToken({id: user._id})
   const response = { token, user}
   return response
 }
@@ -24,7 +24,7 @@ export const registerUser = async (email: string, password: string) => {
   }else {
     const hashPassword = await encodePassword(password)
     const newUser = await UserModel.create({email,password: hashPassword})
-    const token = await generateToken({email})
+    const token = await generateToken({id: newUser._id})
     const response = { token, newUser }
     return response
   }

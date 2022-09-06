@@ -1,5 +1,6 @@
 export interface Expense {
   description: string,
   amount: number,
-  paid: boolean
+  paid: boolean,
+  userId: string
 }
